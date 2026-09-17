@@ -1,66 +1,55 @@
-<div align="center">
+# TypeSprint
 
-# ⌨️ TypeSprint
+A simple typing-speed practice web app that supports both Arabic and English.
 
-**موقع بسيط لتعلّم الكتابة السريعة يدعم اللغتين العربية والإنجليزية**
+## Overview
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
-![No Dependencies](https://img.shields.io/badge/dependencies-none-0d9488?style=flat)
+TypeSprint is a browser-based typing trainer that runs with no libraries or build tools. Type the displayed text within 60 seconds and track your speed and accuracy in real time.
 
-</div>
+## Features
 
----
+- Two languages: Arabic (RTL) and English.
+- Live words-per-minute (WPM) counter.
+- Accuracy percentage and mistake counter.
+- 60-second timer with a progress bar.
+- Light and dark mode that remembers your choice.
+- Live character highlighting: correct in green, wrong underlined in red.
+- Accessibility: color contrast, keyboard navigation, and ARIA labels.
+- Responsive design for both mobile and desktop.
 
-## 🎯 نظرة عامة
+## Getting Started
 
-**TypeSprint** أداة تدريب على الكتابة السريعة تعمل في المتصفح مباشرة، بدون أي مكتبات أو أدوات بناء. اكتب النص المعروض خلال 60 ثانية، وتابع سرعتك ودقتك لحظة بلحظة.
-
-## ✨ الميزات
-
-- 🇸🇦 / 🇬🇧 **لغتان** — تدريب باللغة العربية (RTL) والإنجليزية.
-- ⚡ **عدّاد السرعة (WPM)** يُحدَّث أثناء الكتابة.
-- 🎯 **نسبة الدقة** وعدّاد الأخطاء.
-- ⏱️ **مؤقّت 60 ثانية** مع شريط تقدّم.
-- 🌗 **وضع فاتح وداكن** يتذكّر اختيارك.
-- 🎨 **تلوين مباشر** للحروف: الصحيح أخضر، والخطأ أحمر بخط متموّج.
-- ♿ **إتاحة (Accessibility)** — تباين ألوان، تنقّل بلوحة المفاتيح، وتسميات ARIA.
-- 📱 **تصميم متجاوب** يعمل على الجوال والحاسب.
-
-## 🚀 التشغيل
-
-الموقع لا يحتاج تثبيت أي شيء. شغّل خادمًا محليًا بسيطًا:
+The app needs no installation. Start a simple local server:
 
 ```bash
 cd typeing
 python3 -m http.server 8000
 ```
 
-ثم افتح في المتصفح:
+Then open it in your browser:
 
 ```text
 http://localhost:8000
 ```
 
-> يمكن أيضًا فتح ملف `index.html` مباشرة، لكن الخادم المحلي أفضل لتحميل الخطوط بشكل صحيح.
+You can also open `index.html` directly, but a local server loads the fonts more reliably.
 
-## 🗂️ بنية المشروع
+## Project Structure
 
 ```text
 typeing/
-├── index.html   # هيكل الصفحة
-├── styles.css   # التصميم ونظام الألوان (فاتح/داكن)
-├── script.js    # منطق الاختبار والإحصائيات
+├── index.html   # Page structure
+├── styles.css   # Styling and color system (light/dark)
+├── script.js    # Test logic and statistics
 └── README.md
 ```
 
-## 🛠️ التقنيات
+## Technologies
 
-- HTML5 + CSS3 (متغيّرات CSS، Grid، Flexbox)
-- JavaScript خام (Vanilla) — بلا أي اعتماديات
-- خطوط Google: Noto Sans Arabic · Inter · JetBrains Mono
+- HTML5 and CSS3 (CSS variables, Grid, Flexbox)
+- Vanilla JavaScript, no dependencies
+- Google Fonts: Noto Sans Arabic, Inter, JetBrains Mono
 
-## 📄 الرخصة
+## License
 
-مشروع تعليمي مفتوح للاستخدام الشخصي.
+An educational project, free for personal use.
