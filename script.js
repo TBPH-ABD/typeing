@@ -36,6 +36,36 @@ const newTestBtn = document.getElementById('new-test');
 const startBtn = document.getElementById('start-btn');
 const resetBtn = document.getElementById('reset-btn');
 const langButtons = document.querySelectorAll('.lang-btn');
+const typingPanelEl = document.querySelector('.typing-panel');
+const progressBarEl = document.getElementById('progress-bar');
+const resultEl = document.getElementById('result');
+const themeToggleBtn = document.getElementById('theme-toggle');
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  themeToggleBtn.setAttribute('aria-pressed', String(theme === 'dark'));
+}
+
+function initTheme() {
+  let saved = null;
+  try {
+    saved = localStorage.getItem('typesprint-theme');
+  } catch (error) {
+    saved = null;
+  }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  applyTheme(saved || (prefersDark ? 'dark' : 'light'));
+}
+
+function toggleTheme() {
+  const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  try {
+    localStorage.setItem('typesprint-theme', next);
+  } catch (error) {
+    // Storage unavailable; theme still applies for this visit.
+  }
+}
 
 function getRandomQuote(language) {
   const list = quotes[language];
@@ -47,11 +77,14 @@ function setLanguage(language) {
   langButtons.forEach((button) => {
     const isActive = button.dataset.language === language;
     button.classList.toggle('active', isActive);
+    button.setAttribute('aria-pressed', String(isActive));
   });
 
   modeLabelEl.textContent = `الوضع: ${language === 'arabic' ? 'عربي' : 'English'}`;
   quoteEl.classList.toggle('rtl', language === 'arabic');
   quoteEl.classList.toggle('en', language === 'english');
+  quoteEl.setAttribute('lang', language === 'arabic' ? 'ar' : 'en');
+  typingPanelEl.classList.toggle('is-en', language === 'english');
   inputEl.setAttribute('dir', language === 'arabic' ? 'rtl' : 'ltr');
   inputEl.placeholder = language === 'arabic' ? 'ابدأ الكتابة هنا...' : 'Start typing here...';
   selectNewQuote();
@@ -71,8 +104,11 @@ function selectNewQuote() {
 
   inputEl.value = '';
   inputEl.disabled = false;
+  resultEl.hidden = true;
+  progressBarEl.style.transform = 'scaleX(0)';
   inputEl.focus();
   renderQuote();
+  highlightQuote();
   updateStats();
 }
 
@@ -164,6 +200,14 @@ function finishTest() {
   inputEl.disabled = true;
   inputEl.blur();
   updateStats();
+  highlightQuote();
+
+  const isArabic = state.language === 'arabic';
+  resultEl.textContent = isArabic
+    ? `انتهى الاختبار: ${wpmEl.textContent} كلمة في الدقيقة بدقة ${accuracyEl.textContent}. اضغط "نص جديد" للمحاولة مرة أخرى.`
+    : `Test complete: ${wpmEl.textContent} WPM at ${accuracyEl.textContent} accuracy.`;
+  resultEl.dir = isArabic ? 'rtl' : 'ltr';
+  resultEl.hidden = false;
 }
 
 function handleTyping(event) {
@@ -177,6 +221,8 @@ function handleTyping(event) {
 
   calculateMetrics();
   highlightQuote();
+  const progress = Math.min(inputEl.value.length / state.quote.length, 1);
+  progressBarEl.style.transform = `scaleX(${progress})`;
 
   if (inputEl.value === state.quote) {
     finishTest();
@@ -197,4 +243,7 @@ startBtn.addEventListener('click', () => {
 resetBtn.addEventListener('click', selectNewQuote);
 inputEl.addEventListener('input', handleTyping);
 
+themeToggleBtn.addEventListener('click', toggleTheme);
+
+initTheme();
 setLanguage('arabic');
