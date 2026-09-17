@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TypeSprint | تعلم الكتابة السريعة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark">TS</span>
+          <div>
+            <h1>TypeSprint</h1>
+            <p>تدريب الكتابة السريعة</p>
+          </div>
+        </div>
+
+        <div class="language-switch" aria-label="اختيار اللغة">
+          <button class="lang-btn active" data-language="arabic" type="button">العربية</button>
+          <button class="lang-btn" data-language="english" type="button">English</button>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="stats-panel">
+          <div class="stat-card">
+            <span class="label">WPM</span>
+            <strong id="wpm">0</strong>
+          </div>
+          <div class="stat-card">
+            <span class="label">Accuracy</span>
+            <strong id="accuracy">100%</strong>
+          </div>
+          <div class="stat-card">
+            <span class="label">Time</span>
+            <strong id="time">60s</strong>
+          </div>
+          <div class="stat-card">
+            <span class="label">Mistakes</span>
+            <strong id="mistakes">0</strong>
+          </div>
+        </section>
+
+        <section class="typing-panel">
+          <div class="quote-header">
+            <span class="pill" id="mode-label">الوضع: عربي</span>
+            <button id="new-test" type="button" class="secondary-btn">اختبار جديد</button>
+          </div>
+
+          <div id="quote" class="quote-box rtl" aria-live="polite"></div>
+
+          <textarea
+            id="typing-input"
+            class="typing-input"
+            placeholder="ابدأ الكتابة هنا..."
+            aria-label="منطقة الكتابة"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            dir="rtl"
+          ></textarea>
+
+          <div class="action-row">
+            <button id="start-btn" class="primary-btn" type="button">ابدأ الآن</button>
+            <button id="reset-btn" class="ghost-btn" type="button">إعادة الضبط</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
